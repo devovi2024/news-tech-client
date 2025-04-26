@@ -1,13 +1,10 @@
 import { useState } from "react";
 import { FaBars, FaTwitter, FaFacebookF, FaYoutube, FaSearch } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ categories, profile, date }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  const categories = ["Technology", "Health", "Sports", "Business"];
-  const profile = { name: "John Doe", avatar: "/assets/images/profile.jpg" };
-  const date = "April 26, 2025";
 
   return (
     <header className="w-full">
@@ -39,27 +36,39 @@ const Navbar = () => {
 
           <div className="flex items-center space-x-4">
             <div className="hidden lg:flex items-center space-x-6">
-              <a href="#" className="text-white hover:text-yellow-300 transition">Home</a>
-              <a href="#" className="text-white hover:text-yellow-300 transition">Pages</a>
-              <a href="#" className="text-white hover:text-yellow-300 transition">Posts</a>
+              <Link to="/" className="text-white hover:text-yellow-300 transition">Home</Link>
+              <Link to="/pages" className="text-white hover:text-yellow-300 transition">Pages</Link>
+              <Link to="/posts" className="text-white hover:text-yellow-300 transition">Posts</Link>
               <div className="relative">
                 <button onClick={() => setDropdownOpen(!dropdownOpen)} className="text-white hover:text-yellow-300 transition">
                   Categories ▼
                 </button>
                 {dropdownOpen && (
                   <div className="absolute bg-white shadow-md rounded mt-2 py-2 w-40">
-                    {categories.map((cat, i) => (
-                      <a key={i} href="#" className="block px-4 py-2 text-gray-800 hover:bg-green-600 hover:text-white">
-                        {cat}
-                      </a>
-                    ))}
+                    {categories && categories.length > 0 ? (
+                      categories.map((cat, i) => (
+                        <Link key={i} to={`/category/${cat.slug}`} className="block px-4 py-2 text-gray-800 hover:bg-green-600 hover:text-white">
+                          {cat.name}
+                        </Link>
+                      ))
+                    ) : (
+                      <div className="px-4 py-2 text-gray-800">No categories available</div>
+                    )}
                   </div>
                 )}
               </div>
-              <div className="flex items-center space-x-2">
-                <img src={profile.avatar} alt="Profile" className="h-8 w-8 rounded-full object-cover" />
-                <span className="text-white text-sm">{profile.name}</span>
-              </div>
+              {/* Conditional Rendering for Profile Avatar */}
+              {profile && profile.avatar ? (
+                <div className="flex items-center space-x-2">
+                  <img src={profile.avatar} alt="Profile" className="h-8 w-8 rounded-full object-cover" />
+                  <span className="text-white text-sm">{profile.name}</span>
+                </div>
+              ) : (
+                <div className="flex items-center space-x-2">
+                  <div className="h-8 w-8 bg-gray-300 rounded-full" /> {/* Placeholder */}
+                  <span className="text-white text-sm">User</span> {/* Placeholder name */}
+                </div>
+              )}
             </div>
 
             <div className="flex items-center space-x-3">
@@ -75,27 +84,39 @@ const Navbar = () => {
       {menuOpen && (
         <div className="lg:hidden bg-gray-900 text-white">
           <div className="px-6 py-4 space-y-4">
-            <a href="#" className="block hover:text-yellow-300">Home</a>
-            <a href="#" className="block hover:text-yellow-300">Pages</a>
-            <a href="#" className="block hover:text-yellow-300">Posts</a>
+            <Link to="/" className="block hover:text-yellow-300">Home</Link>
+            <Link to="/pages" className="block hover:text-yellow-300">Pages</Link>
+            <Link to="/posts" className="block hover:text-yellow-300">Posts</Link>
             <div className="relative">
               <button onClick={() => setDropdownOpen(!dropdownOpen)} className="block w-full text-left hover:text-yellow-300">
                 Categories ▼
               </button>
               {dropdownOpen && (
                 <div className="mt-2 bg-white rounded shadow-md">
-                  {categories.map((cat, i) => (
-                    <a key={i} href="#" className="block px-4 py-2 text-gray-800 hover:bg-green-600 hover:text-white">
-                      {cat}
-                    </a>
-                  ))}
+                  {categories && categories.length > 0 ? (
+                    categories.map((cat, i) => (
+                      <Link key={i} to={`/category/${cat.slug}`} className="block px-4 py-2 text-gray-800 hover:bg-green-600 hover:text-white">
+                        {cat.name}
+                      </Link>
+                    ))
+                  ) : (
+                    <div className="px-4 py-2 text-gray-800">No categories available</div>
+                  )}
                 </div>
               )}
             </div>
-            <div className="flex items-center space-x-3 pt-4 border-t border-gray-700">
-              <img src={profile.avatar} alt="Profile" className="h-8 w-8 rounded-full object-cover" />
-              <span>{profile.name}</span>
-            </div>
+            {/* Conditional Rendering for Profile Avatar in Mobile */}
+            {profile && profile.avatar ? (
+              <div className="flex items-center space-x-3 pt-4 border-t border-gray-700">
+                <img src={profile.avatar} alt="Profile" className="h-8 w-8 rounded-full object-cover" />
+                <span>{profile.name}</span>
+              </div>
+            ) : (
+              <div className="flex items-center space-x-3 pt-4 border-t border-gray-700">
+                <div className="h-8 w-8 bg-gray-300 rounded-full" />
+                <span>User</span>
+              </div>
+            )}
           </div>
         </div>
       )}
