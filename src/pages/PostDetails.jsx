@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom";
 import RelatedPosts from "../components/RelatedPosts";
 import CommentsSection from "../components/CommentsSection";
 import CategoryList from "../components/CategoryList";
+import PostsTabSection from "../components/PostsTabSection";
+import MostView from "../components/MostView";
 
 const PostDetails = ({ posts, categories }) => {
   const { slug } = useParams();
@@ -29,23 +31,40 @@ const PostDetails = ({ posts, categories }) => {
   ];
 
   return (
-    <div className="post-details">
-      <h1>{post.title}</h1>
-      <p>{post.content}</p>
-      <div className="author">
-        <h3>By: {post.author}</h3>
-        <p>{post.date}</p>
+    <section className="p-6 flex">
+      <div className="post-details space-y-8">
+        {/* Post Title and Content */}
+        <div>
+          <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
+          <p className="text-gray-700 mb-6">{post.content}</p>
+          <div className="author text-gray-500">
+            <h3 className="font-semibold">By: {post.author}</h3>
+            <p>{post.date}</p>
+          </div>
+        </div>
+
+        {/* Related Posts Section */}
+        <RelatedPosts
+          posts={posts}
+          currentPostId={post.id}
+          currentPostCategory={post.category}
+        />
+
+        {/* Comments Section */}
+        <CommentsSection comments={initialComments} postId={post.id} />
       </div>
 
-      {/* Related Posts Section */}
-      <RelatedPosts posts={posts} currentPostId={post.id} currentPostCategory={post.category} />
-
-      {/* Comments Section */}
-      <CommentsSection comments={initialComments} postId={post.id} />
-
-      {/* Category List (show all available categories) */}
-      <CategoryList categories={categories} />
-    </div>
+      <div>
+        {/* Posts Tab Section */}
+        <PostsTabSection posts={posts} category={post.category} />
+        
+        {/* Category List */}
+        <CategoryList categories={categories} />
+        
+        {/* Most View Section */}
+        <MostView posts={posts} />
+      </div>
+    </section>
   );
 };
 
