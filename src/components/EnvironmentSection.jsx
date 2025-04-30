@@ -8,9 +8,9 @@ const EnvironmentSection = ({ posts }) => {
   if (businessPosts.length === 0) return null;
 
   return (
-    <div className="business-news mt-10">
+    <div className="business-news   mt-10">
       <h2 className="text-xl font-bold mb-4">💼 Environment News</h2>
-      <div className="business-grid grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="business-grid grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
         {businessPosts.map((post) => (
           <div
             key={post.id}

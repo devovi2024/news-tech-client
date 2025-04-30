@@ -184,6 +184,8 @@
     },
     {
       "id": 15,
+      "image": "../public/thumbnails/thumbnail1.jpg",
+      
       "title": "The Evolution of Typography in Digital Design",
       "author": "Mow",
       "category": "Design",
@@ -196,9 +198,22 @@
       "slug": "the-evolution-of-typography-in-digital-design"
     }
   ],
-  "categories": [
-    { "name": "Environment", "slug": "environment" },
-    { "name": "Technology", "slug": "technology" },
-    { "name": "Design", "slug": "design" }
-  ]
+"categories": [
+  { 
+    "name": "Environment", 
+    "slug": "environment",
+    "image": "../public/thumbnails/thumbnail1.jpg"
+  },
+  { 
+    "name": "Technology", 
+    "slug": "technology",
+    "image": "../public/thumbnails/thumbnail1.jpg"
+  },
+  { 
+    "name": "Design", 
+    "slug": "design",
+    "image": "../public/thumbnails/thumbnail1.jpg"
+  }
+]
+
 }

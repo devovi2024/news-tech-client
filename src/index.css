@@ -1,1 +1,57 @@
 @import "tailwindcss";
+
+
+
+
+
+
+/* Global background animation */
+@keyframes african-theme {
+    0% {
+      background-position: 0 0;
+    }
+    50% {
+      background-position: 100% 100%;
+    }
+    100% {
+      background-position: 0 0;
+    }
+  }
+  
+  body {
+    background: url('/path/to/african-background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    animation: african-theme 15s ease-in-out infinite;
+  }
+  
+  /* Optional: Dark overlay effect for category cards */
+  .category-overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+  }
+  
+  .category-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: white;
+    color: black;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+  }
+  
+  .category-button:hover {
+    opacity: 1;
+  }
+  
+  .category-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  
